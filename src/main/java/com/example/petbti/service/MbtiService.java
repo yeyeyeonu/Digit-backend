@@ -6,6 +6,7 @@ import com.example.petbti.request.MbtiRequest;
 @Service
 public class MbtiService {
 
+
     public String calculateMbti(MbtiRequest req) {
         // Null 방지 및 소문자 변환
         String q1 = safe(req.getQ1());
@@ -15,6 +16,9 @@ public class MbtiService {
 
         System.out.println("🔹 받은 값 → q1=" + q1 + ", q2=" + q2 + ", q3=" + q3 + ", q4=" + q4);
 
+        /* 조건문이 너무 길다
+        나중에는 map 사용할 것
+         */
         // 모든 if문에서 "문자열".equals(변수) 형태 사용 → null 절대 안전
         if ("e".equals(q1) && "n".equals(q2) && "f".equals(q3) && "j".equals(q4)) {
             return "ENFJ";
@@ -54,6 +58,11 @@ public class MbtiService {
         }
     }
 
+    /* safe 정의
+    1. Null 이 들어오면 "" 빈 문자열 처리
+    2. 공백 제거 (s.trim())
+    3. toLowerCase() 모두 소문자로 통일
+     */
     private String safe(String s) {
         if (s == null) return "";
         return s.trim().toLowerCase(); // 공백 제거, 소문자화
